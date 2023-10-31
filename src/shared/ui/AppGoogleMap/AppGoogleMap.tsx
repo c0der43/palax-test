@@ -1,9 +1,10 @@
-import {FC, memo, useCallback, useEffect, useRef} from "react";
-import {GoogleMap, Marker, MarkerF, useJsApiLoader} from "@react-google-maps/api";
+import {FC, memo, useCallback, useMemo, useRef} from "react";
+import {GoogleMap, MarkerF, useJsApiLoader} from "@react-google-maps/api";
 import classNames from "classnames";
 import styles from './AppGoogleMap.module.scss';
-import {Coordinates} from "@/shared/types/coordinates.ts";
-import {IEvent} from "@/entities/Event";
+import {Geo} from "@/entities/User/model/types/IUser.ts";
+
+export type Coordinates = {lat: number, lng: number};
 
 
 const defOptions = {
@@ -20,15 +21,14 @@ const defOptions = {
     mapId: '5d19bb324d51c37f'
 }
 
-const center = {
-    lat: -3.745,
-    lng: -38.523
-};
+// const center = {
+//     lat: -3.745,
+//     lng: -38.523
+// };
 
 interface AppGoogleMapProps {
     className?: string;
-    choiceLocation?: Coordinates;
-    eventsData?: IEvent[];
+    userLocation: Geo;
     zoom?: number;
     borderRadius?: number;
 }
@@ -36,21 +36,19 @@ export const AppGoogleMap: FC<AppGoogleMapProps> = memo((props) => {
 
     const {
         borderRadius = 8,
-        zoom = 5,
-        eventsData,
-        choiceLocation,
+        zoom = 2,
+        userLocation,
         className
     } = props;
 
-    const mapRef = useRef<google.maps.Map>();
-
-    useEffect(() => {
-        if(mapRef.current && choiceLocation){
-            const bounds = new google.maps.LatLngBounds();
-            bounds.extend(new google.maps.LatLng(choiceLocation.lat, choiceLocation.lng));
-            mapRef.current?.fitBounds(bounds);
+    const userLocationLatLng = useMemo(() => {
+        return {
+            lat: +userLocation.lat,
+            lng: +userLocation.lng
         }
-    }, [choiceLocation]);
+    }, [userLocation]);
+
+    const mapRef = useRef<google.maps.Map>();
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -75,17 +73,14 @@ export const AppGoogleMap: FC<AppGoogleMapProps> = memo((props) => {
                     height: '100%',
                     borderRadius: `${borderRadius}px`
                 }}
-                center={choiceLocation != undefined ? choiceLocation:  center}
+                center={userLocationLatLng}
                 zoom={zoom}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
                 options={defOptions}>
                 {
-                   isLoaded && choiceLocation && <MarkerF position={choiceLocation}/>
-                }
-                {
-                    eventsData?.map((item) =>
-                        <Marker key={item.id} position={{lat: +item.locationLat, lng: +item.locationLng}}/>)
+
+                    <MarkerF position={{lat: +userLocation.lat, lng: +userLocation.lng}}/>
                 }
             </GoogleMap> : <h1>Loading...</h1>
         }
