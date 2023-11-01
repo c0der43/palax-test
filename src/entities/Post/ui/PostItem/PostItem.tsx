@@ -8,7 +8,7 @@ import {IUser} from "@/entities/User";
 
 interface PostItemProps {
     post: IPost,
-    creator: IUser
+    creator?: IUser
 }
 export const PostItem: FC<PostItemProps> = memo((props) => {
 
@@ -34,17 +34,17 @@ export const PostItem: FC<PostItemProps> = memo((props) => {
 
                     <div>
                         <div style={{display: 'flex', gap:'5px'}}>
-                            <Text text={creator.name} bold/>
+                            <Text text={creator?.name} bold/>
                             <Card
                                 paddingX={2}
                                 bgColor={'#ff6978'}
                                 paddingY={10}
                                 shadow={false}>
-                                <Text text={`@${creator.username}`} size={'s'}/>
+                                <Text text={`@${creator?.username}`} size={'s'}/>
                             </Card>
                         </div>
 
-                        <Text text={creator.email} bold size={'s'}/>
+                        <Text text={creator?.email} bold size={'s'}/>
                     </div>
 
                 </div>
