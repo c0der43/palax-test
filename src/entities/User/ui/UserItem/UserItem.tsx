@@ -6,21 +6,29 @@ import {AppGoogleMap} from "@/shared/ui/AppGoogleMap";
 import {Card} from "@/shared/ui/Card/Card.tsx";
 import {IUser} from "@/entities/User";
 import {Avatar} from "@/shared/ui/Avatar";
+import { MdMode } from "react-icons/md";
+import {Button} from "@/shared/ui/Button";
 
 interface UserItemProps {
     user: IUser,
     onClickViewUserPost?: (userId: number) => void;
+    onClickOpenModal?: () => void;
 }
 export const UserItem: FC<UserItemProps> = memo((props) => {
 
     const {
+        onClickOpenModal,
         user,
         onClickViewUserPost
     } = props;
 
     return <>
         <Card>
-            <article className={styles.User} onClick={() => onClickViewUserPost?.(user.id)}>
+            <article className={styles.User}>
+
+                <button className={styles.btn_edit}>
+                    <MdMode size={25} onClick={() => onClickOpenModal?.()}/>
+                </button>
 
                 <div className={styles.info_header}>
                     <Avatar/>
@@ -75,6 +83,11 @@ export const UserItem: FC<UserItemProps> = memo((props) => {
                         <AppGoogleMap userLocation={user.address.geo}/>
                     </div>
                 </div>
+                <Button
+                    onClick={() => onClickViewUserPost?.(user.id)}
+                    className={styles.btn_add}>
+                    add
+                </Button>
             </article>
         </Card>
     </>
