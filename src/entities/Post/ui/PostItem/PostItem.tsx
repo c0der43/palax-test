@@ -5,14 +5,17 @@ import {Card} from "@/shared/ui/Card/Card.tsx";
 import {Text} from "@/shared/ui/Text";
 import {Avatar} from "@/shared/ui/Avatar";
 import {IUser} from "@/entities/User";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 interface PostItemProps {
     post: IPost,
-    creator: IUser
+    creator: IUser,
+    onClickDeletePost?: (postId: number) => void;
 }
 export const PostItem: FC<PostItemProps> = memo((props) => {
 
     const {
+        onClickDeletePost,
         creator,
         post,
     } = props;
@@ -20,6 +23,11 @@ export const PostItem: FC<PostItemProps> = memo((props) => {
     const postFooter = <>
         <div className={styles.post_footer}>
             <div className={styles.post_data_container}>
+                <MdOutlineDeleteOutline
+                    onClick={() => onClickDeletePost?.(post.id)}
+                    size={25}
+                    className={styles.delete}/>
+
                 <Avatar size={'s'}/>
 
                 <div>

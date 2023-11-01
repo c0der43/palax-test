@@ -1,4 +1,4 @@
-import {createEntityAdapter, createSlice} from "@reduxjs/toolkit";
+import {createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchGetPostsByUserId, IPost} from "@/entities/Post";
 import {MainPagePostsSchema} from "@/pages/MainPage/model/types/MainPagePostsSchema.ts";
 import {StateSchema} from "@/app/providers/StoreProvider/config/StateSchema.ts";
@@ -17,7 +17,11 @@ const mainPagePostsSlice = createSlice({
         ids: [],
         entities: {}
     }),
-    reducers: {},
+    reducers: {
+        deletePostById: (state, {payload}: PayloadAction<number>) => {
+            postsAdapter.removeOne(state, payload);
+        }
+    },
     extraReducers: builder => {
         builder.addCase(fetchGetPostsByUserId.fulfilled, (state, action) => {
             postsAdapter.addMany(state, action);
@@ -26,5 +30,6 @@ const mainPagePostsSlice = createSlice({
 })
 
 export const {
-    reducer: mainPagePostReducer
+    reducer: mainPagePostReducer,
+    actions: mainPagePostActions
 } = mainPagePostsSlice;

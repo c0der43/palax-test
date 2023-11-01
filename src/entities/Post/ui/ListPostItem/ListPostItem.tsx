@@ -9,10 +9,12 @@ interface ListPostItemProps {
     className?: string;
     listPost: IPost[];
     listUser: IUser[];
+    onClickDeletePost?: (postId: number) => void;
 }
 export const ListPostItem: FC<ListPostItemProps> = memo((props) => {
 
     const {
+        onClickDeletePost,
         listPost,
         className,
         listUser
@@ -24,6 +26,7 @@ export const ListPostItem: FC<ListPostItemProps> = memo((props) => {
                 listPost.map((post) => <PostItem
                     creator={listUser.filter(user => user.id === post.userId)[0]}
                     post={post}
+                    onClickDeletePost={(postId) => onClickDeletePost?.(postId)}
                     key={post.id}/>)
             }
         </div>
