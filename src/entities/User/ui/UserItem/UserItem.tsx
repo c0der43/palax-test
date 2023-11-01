@@ -5,6 +5,7 @@ import { GrMapLocation } from "react-icons/gr";
 import {AppGoogleMap} from "@/shared/ui/AppGoogleMap";
 import {Card} from "@/shared/ui/Card/Card.tsx";
 import {IUser} from "@/entities/User";
+import {Avatar} from "@/shared/ui/Avatar";
 
 interface UserItemProps {
     user: IUser
@@ -20,10 +21,7 @@ export const UserItem: FC<UserItemProps> = memo((props) => {
             <article className={styles.User}>
 
                 <div className={styles.info_header}>
-                    <img className={styles.profile_photo}
-                         alt={'user photo'}
-                         src={'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=1288'}/>
-
+                    <Avatar/>
                     <div className={styles.connect_data}>
 
                         <Text text={user.name} bold className={styles.bio} size={'l'}/>

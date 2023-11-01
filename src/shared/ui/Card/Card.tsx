@@ -9,10 +9,12 @@ interface CardProps {
     paddingY?: number,
     shadow?: boolean,
     bgColor?: string;
+    className?: string;
 }
 export const Card: FC<CardProps> = (props) => {
 
     const {
+        className,
         shadow = true,
         children,
         borderRadiusPx = 8,
@@ -28,7 +30,9 @@ export const Card: FC<CardProps> = (props) => {
     }), [bgColor, borderRadiusPx, paddingY, paddingX]);
 
     return <>
-        <div style={cssStyles} className={classNames(styles.Card, {[styles.shadow]: shadow})}>
+        <div style={cssStyles} className={
+            classNames(styles.Card, {[styles.shadow]: shadow}, className)
+        }>
             {children}
         </div>
     </>

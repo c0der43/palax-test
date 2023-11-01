@@ -1,3 +1,25 @@
 .PostItem{
+  flex-grow: 1;
+  height: fit-content;
+  max-width: 30%;
+  overflow: hidden;
 
+  .post_container{
+    display: flex;
+    margin: 15px;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .post_footer{
+    padding: 5px;
+    height: fit-content;
+    background: #dcdcdc;
+
+    .post_data_container{
+      margin: 5px 10px;
+      display: flex;
+      gap: 10px;
+    }
+  }
 }
