@@ -7,18 +7,20 @@ import {IUser} from "@/entities/User";
 interface ListUserItemProps {
     users: IUser[];
     className?: string;
+    onClickViewUserPost?: (userId: number) => void;
 }
 export const ListUserItem: FC<ListUserItemProps> = memo((props) => {
 
     const {
         className,
-        users
+        users,
+        onClickViewUserPost
     } = props;
 
     return <>
         <div className={classNames(styles.ListUser, className)}>
             {
-                users.map((user) => <UserItem user={user} key={user.id}/>)
+                users.map((user) => <UserItem user={user} key={user.id} onClickViewUserPost={onClickViewUserPost}/>)
             }
         </div>
     </>

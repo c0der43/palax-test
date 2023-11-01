@@ -1,10 +1,14 @@
 import {createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 import {MainPageUsersSchema} from "@/pages/MainPage/model/types/MainPageUsersSchema.ts";
-import {IUser} from "@/entities/User";
+import {fetchGetUsers, IUser} from "@/entities/User";
+import {StateSchema} from "@/app/providers/StoreProvider/config/StateSchema.ts";
 
 const usersAdapter = createEntityAdapter<IUser>({
     selectId: (user) => user.id
 });
+
+export const mainPageUsersSelectors = usersAdapter
+    .getSelectors<StateSchema>((state) => state.mainPage.users)
 
 const mainPageUsersSlice = createSlice({
     name: 'namePageUserSlice',
@@ -13,7 +17,12 @@ const mainPageUsersSlice = createSlice({
         entities: {},
         ids: []
     }),
-    reducers: {}
+    reducers: {},
+    extraReducers: builder => {
+        builder.addCase(fetchGetUsers.fulfilled, (state, {payload}) => {
+            usersAdapter.setAll(state, payload);
+        })
+    }
 });
 
 export const {

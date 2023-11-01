@@ -8,17 +8,19 @@ import {IUser} from "@/entities/User";
 import {Avatar} from "@/shared/ui/Avatar";
 
 interface UserItemProps {
-    user: IUser
+    user: IUser,
+    onClickViewUserPost?: (userId: number) => void;
 }
 export const UserItem: FC<UserItemProps> = memo((props) => {
 
     const {
-        user
+        user,
+        onClickViewUserPost
     } = props;
 
     return <>
         <Card>
-            <article className={styles.User}>
+            <article className={styles.User} onClick={() => onClickViewUserPost?.(user.id)}>
 
                 <div className={styles.info_header}>
                     <Avatar/>
