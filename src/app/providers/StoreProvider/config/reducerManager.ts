@@ -2,7 +2,7 @@ import {AnyAction, CombinedState, combineReducers, Reducer, ReducersMapObject} f
 import {StateSchema} from "@/app/providers/StoreProvider/config/StateSchema.ts";
 import {StateSchemaKey} from "@/app/providers/StoreProvider/config/StateSchemaKey.ts";
 
-interface ReducerManager {
+export interface ReducerManager {
     getReducerMap: () => ReducersMapObject<StateSchema>;
     reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>;
     add: (key: StateSchemaKey, reducer: Reducer) => void;
