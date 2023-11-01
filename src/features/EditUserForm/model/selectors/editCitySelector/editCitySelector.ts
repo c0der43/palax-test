@@ -1,0 +1,3 @@
+import {StateSchema} from "@/app/providers/StoreProvider/config/StateSchema.ts";
+
+export const editCitySelector = (state: StateSchema) => state.editUser?.editCity ?? '';
