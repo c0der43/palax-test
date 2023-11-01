@@ -1,7 +1,6 @@
 import {FC, memo} from "react";
 import {Text} from "@/shared/ui/Text";
-import {ListUserItem} from "@/entities/User";
-import {IUser} from "@/entities/User/model/types/IUser.ts";
+import {IUser, ListUserItem} from "@/entities/User";
 import styles from './UsersSection.module.scss';
 import classNames from "classnames";
 

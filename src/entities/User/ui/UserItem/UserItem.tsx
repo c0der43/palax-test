@@ -1,10 +1,10 @@
 import {FC, memo} from "react";
 import styles from './UserItem.module.scss';
-import {IUser} from "@/entities/User/model/types/IUser.ts";
 import {Text} from "@/shared/ui/Text";
 import { GrMapLocation } from "react-icons/gr";
 import {AppGoogleMap} from "@/shared/ui/AppGoogleMap";
 import {Card} from "@/shared/ui/Card/Card.tsx";
+import {IUser} from "@/entities/User";
 
 interface UserItemProps {
     user: IUser
