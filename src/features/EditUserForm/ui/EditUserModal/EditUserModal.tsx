@@ -5,17 +5,19 @@ import EditUserForm from "@/features/EditUserForm/ui/EditUserForm/EditUserForm.t
 
 interface EditUserModalProps {
     onClose?: () => void;
+    userId: number;
 }
 export const EditUserModal: FC<EditUserModalProps> = (props) => {
 
     const {
+        userId,
         onClose
     } = props;
 
     return <>
         <Modal onClose={() => onClose?.()}>
                 <Suspense fallback={<Text text={'loading chunk...'}/>}>
-                    <EditUserForm/>
+                    <EditUserForm userId={userId}/>
                 </Suspense>
         </Modal>
     </>

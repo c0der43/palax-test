@@ -8,7 +8,7 @@ interface ListUserItemProps {
     users: IUser[];
     className?: string;
     onClickViewUserPost?: (userId: number) => void;
-    onClickOpenModal?: () => void;
+    onClickOpenModal?: (userId: number) => void;
 }
 export const ListUserItem: FC<ListUserItemProps> = memo((props) => {
 
@@ -25,7 +25,7 @@ export const ListUserItem: FC<ListUserItemProps> = memo((props) => {
                 users.map((user) => <UserItem
                     user={user}
                     key={user.id}
-                    onClickOpenModal={() => onClickOpenModal?.()}
+                    onClickOpenModal={() => onClickOpenModal?.(user.id)}
                     onClickViewUserPost={onClickViewUserPost}/>)
             }
         </div>

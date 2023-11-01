@@ -19,6 +19,7 @@ export const UsersSection: FC<UsersSectionProps> = memo((props) => {
     } = props;
 
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [selectedUserId, setSelectedUserId] = useState<number | undefined>();
 
     const users = useSelector(mainPageUsersSelectors.selectAll);
 
@@ -32,12 +33,12 @@ export const UsersSection: FC<UsersSectionProps> = memo((props) => {
         dispatch(fetchGetPostsByUserId(userId));
     }, [dispatch]);
 
-    const clickOpenModal = useCallback(() => {
+    const clickOpenModal = useCallback((userId: number) => {
         setIsOpenModal(true);
+        setSelectedUserId(userId);
     }, [setIsOpenModal]);
 
     const onCloseModal = useCallback(() => {
-        console.log('close');
         setIsOpenModal(false);
         }, [setIsOpenModal]);
 
@@ -52,7 +53,7 @@ export const UsersSection: FC<UsersSectionProps> = memo((props) => {
                 className={styles.list}/>
 
             {
-                isOpenModal && <EditUserModal onClose={onCloseModal}/>
+                selectedUserId && isOpenModal &&  <EditUserModal userId={selectedUserId} onClose={onCloseModal}/>
             }
         </section>
     </>

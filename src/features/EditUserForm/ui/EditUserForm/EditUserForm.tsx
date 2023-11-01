@@ -4,8 +4,17 @@ import {useStore} from "react-redux";
 import {ReduxStoreWithManager} from "@/app/providers/StoreProvider/config/ReduxStoreWithManager.ts";
 import {EditUserFormReducer} from "@/features/EditUserForm/model/slices/EditUserFromSlice.ts";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch";
+import {fetchGetUserById} from "../../model/services/fetchGetUserById/fetchGetUserById.ts";
 
-const EditUserForm: FC = memo(() => {
+interface EditUserFormProps {
+    userId: number;
+}
+
+const EditUserForm: FC<EditUserFormProps> = memo((props) => {
+
+    const {
+        userId
+    } = props;
 
     const store = useStore() as ReduxStoreWithManager;
     const dispatch = useAppDispatch();
@@ -13,6 +22,8 @@ const EditUserForm: FC = memo(() => {
     useEffect(() => {
         store.reducerManager.add('editUser', EditUserFormReducer);
         dispatch({type: `@INIT reducer`});
+
+        dispatch(fetchGetUserById(userId));
 
         return () => {
             store.reducerManager.remove('editUser');
