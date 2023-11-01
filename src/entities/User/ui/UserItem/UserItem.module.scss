@@ -1,7 +1,16 @@
 .User{
+  display: flex;
+  flex-direction: column;
+
   .info_header{
     display: flex;
     gap: 15px;
+
+    .connect_data{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
   }
 
   .profile_photo{
@@ -27,6 +36,19 @@
     margin:10px 0;
   }
 
+  .info_container{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    .fieldset_container{
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+
   fieldset{
     height: fit-content;
 
@@ -43,6 +65,5 @@
   .map_container{
     width: 40%;
     flex-grow: 1;
-    height: 100%;
   }
 }

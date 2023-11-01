@@ -24,6 +24,7 @@ interface TextProps {
     bold?: boolean;
     size?: TextSize;
     className?: string;
+    cite?: string;
 }
 export const Text: FC<TextProps> = memo((props) => {
 
