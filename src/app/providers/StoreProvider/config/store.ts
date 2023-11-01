@@ -1,8 +1,9 @@
-import {configureStore, ReducersMapObject} from "@reduxjs/toolkit";
+import {CombinedState, configureStore, Reducer, ReducersMapObject} from "@reduxjs/toolkit";
 import {StateSchema} from "@/app/providers/StoreProvider/config/StateSchema.ts";
 import {mainPageReducer} from "@/pages/MainPage/model/slices";
 import {ThunkExtraArg} from "@/app/providers/StoreProvider/config/ThunkExtraArg.ts";
 import {$api} from "@/shared/api/api.ts";
+import {createReducerManager} from "@/app/providers/StoreProvider/config/reducerManager.ts";
 
 export const createAppStore = () => {
 
@@ -14,8 +15,10 @@ export const createAppStore = () => {
         api: $api
     }
 
+    const reducerManager = createReducerManager(reducers);
+
     const store = configureStore({
-        reducer: reducers,
+        reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
         devTools: true,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({
             thunk: {
@@ -23,6 +26,10 @@ export const createAppStore = () => {
             }
         })
     });
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    store.reducerManager = reducerManager;
 
     return store;
 }

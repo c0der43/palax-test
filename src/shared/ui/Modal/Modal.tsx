@@ -15,7 +15,7 @@ export const Modal: FC<ModalProps> = (props) => {
 
     const modal = <>
         <div className={styles.Modal} onClick={onClose}>
-            <div className={styles.content}>
+            <div className={styles.content} onClick={(e) => e.stopPropagation()}>
                 {children}
             </div>
         </div>
