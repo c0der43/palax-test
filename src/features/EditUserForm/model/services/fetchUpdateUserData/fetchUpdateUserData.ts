@@ -43,6 +43,7 @@ export const fetchUpdateUserData = createAsyncThunk<IUser, void, ThunkConfig<str
         try {
             const {data} = await extra.api.patch(`/users/${values?.currentUser?.id}`, obj);
             console.log(data);
+            alert('Success save!');
             return data;
         }catch (e){
             alert(e);

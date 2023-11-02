@@ -20,6 +20,9 @@ const mainPagePostsSlice = createSlice({
     reducers: {
         deletePostById: (state, {payload}: PayloadAction<number>) => {
             postsAdapter.removeOne(state, payload);
+        },
+        initPosts: (state, {payload}: PayloadAction<IPost[]>) => {
+            postsAdapter.addMany(state, payload);
         }
     },
     extraReducers: builder => {
@@ -29,8 +32,10 @@ const mainPagePostsSlice = createSlice({
         builder.addCase(fetchGetPostsByUserId.rejected, (state) => {
             state.isLoading = false;
         })
-        builder.addCase(fetchGetPostsByUserId.fulfilled, (state, action) => {
-            postsAdapter.addMany(state, action);
+        builder.addCase(fetchGetPostsByUserId.fulfilled, (state, {payload}) => {
+            if(payload) {
+                postsAdapter.addMany(state, payload);
+            }
             state.isLoading = false;
         })
     }

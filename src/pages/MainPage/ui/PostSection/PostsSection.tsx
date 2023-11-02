@@ -1,4 +1,4 @@
-import {FC, memo, useCallback} from "react";
+import {FC, memo, useCallback, useEffect} from "react";
 import {Text} from "@/shared/ui/Text";
 import {ListPostItem} from "@/entities/Post";
 import classNames from "classnames";
@@ -30,18 +30,27 @@ export const PostsSection: FC<PostsSectionProps> = memo((props) => {
         dispatch(mainPagePostActions.deletePostById(postId));
     }, [dispatch]);
 
+    useEffect(() => {
+        const posts = localStorage.getItem('posts');
+        if(posts){
+            dispatch(mainPagePostActions.initPosts(JSON.parse(posts)));
+        }
+    }, [dispatch]);
+
+    useEffect(() => {
+        localStorage.setItem('posts', JSON.stringify(posts))
+    }, [posts]);
+
     return <>
         <section className={classNames(className)}>
             <Text text={'Posts'} size={'l'} bold/>
 
-            {
-                isLoadingPosts ? <Text text={'loading...'}/> :
+            <ListPostItem
+                listPost={posts}
+                onClickDeletePost={onDeletePostById}
+                listUser={users}/>
 
-                    <ListPostItem
-                        listPost={posts}
-                        onClickDeletePost={onDeletePostById}
-                        listUser={users}/>
-            }
+            {isLoadingPosts && <Text text={'loading...'}/>}
         </section>
     </>
 
