@@ -21,6 +21,14 @@ const mainPageUsersSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(fetchGetUsers.fulfilled, (state, {payload}) => {
             usersAdapter.setAll(state, payload);
+            state.isLoading = false;
+        })
+        builder.addCase(fetchGetUsers.pending, (state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(fetchGetUsers.rejected, (state) => {
+            usersAdapter.setAll(state, payload);
+            state.isLoading = false;
         })
     }
 });

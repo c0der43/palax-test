@@ -8,6 +8,9 @@ import {useSelector} from "react-redux";
 import {mainPageUsersSelectors} from "@/pages/MainPage/model/slices/MainPageUsersSlice.ts";
 import {fetchGetPostsByUserId} from "@/entities/Post";
 import {EditUserModal} from "@/features/EditUserForm/ui/EditUserModal/EditUserModal.tsx";
+import {
+    usersIsLoadingSelector
+} from "@/pages/MainPage/model/selectors/usersIsLoadingSelector/usersIsLoadingSelector.ts";
 
 interface UsersSectionProps {
     className?: string;
@@ -22,6 +25,7 @@ export const UsersSection: FC<UsersSectionProps> = memo((props) => {
     const [selectedUserId, setSelectedUserId] = useState<number | undefined>();
 
     const users = useSelector(mainPageUsersSelectors.selectAll);
+    const isLoading = useSelector(usersIsLoadingSelector);
 
     const dispatch = useAppDispatch();
 
@@ -51,6 +55,8 @@ export const UsersSection: FC<UsersSectionProps> = memo((props) => {
                 users={users}
                 onClickOpenModal={clickOpenModal}
                 className={styles.list}/>
+
+            {isLoading && <Text text={'loading...'}/>}
 
             {
                 selectedUserId && isOpenModal &&  <EditUserModal userId={selectedUserId} onClose={onCloseModal}/>
