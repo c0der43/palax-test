@@ -1,0 +1,23 @@
+.input_container {
+  display: grid;
+  margin-top: 15px;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.disabled_container{
+  .input_container{
+    pointer-events: none;
+    input{
+      border-color: #9d9d9d;
+      color: #9d9d9d;
+    }
+  }
+  button{
+    pointer-events: none;
+    color: white;
+    border-radius: 8px;
+    border: 0;
+    background: #9d9d9d;
+  }
+}

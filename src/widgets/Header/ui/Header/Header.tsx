@@ -6,7 +6,10 @@ export const Header = memo(() => {
 
     return <>
         <header className={styles.Header}>
-            <Text/>
+            <div className={styles.container}>
+                <Text title={'Palax тестовое'} bold/>
+            </div>
         </header>
     </>
+
 });

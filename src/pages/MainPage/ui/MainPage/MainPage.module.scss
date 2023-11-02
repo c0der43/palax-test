@@ -1,0 +1,21 @@
+.MainPage{
+  width: 100%;
+  display: flex;
+  gap: 25px;
+  position: relative;
+
+  .users{
+    width: 70%;
+  }
+
+  .posts{
+    max-width: 30%;
+    top: 0;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    position: sticky;
+  }
+}

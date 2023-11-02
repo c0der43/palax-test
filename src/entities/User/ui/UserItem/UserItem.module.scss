@@ -1,0 +1,85 @@
+.User{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+
+  .btn_edit{
+    position: absolute;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+    transition-duration: 300ms;
+
+    &:hover{
+      color: #646cff;
+    }
+  }
+
+  .info_header{
+    display: flex;
+    gap: 15px;
+
+    .connect_data{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+
+  .bio{
+    white-space: nowrap;
+  }
+
+  .short_address_info{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .divider{
+    width: 100%;
+    border: 1px solid #dcdcdc;
+    margin:10px 0;
+  }
+
+  .info_container{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    .fieldset_container{
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+
+  fieldset{
+    height: fit-content;
+
+    legend{
+      padding: 0px 8px;
+      font-weight: 600;
+    }
+
+    padding: 0px 15px 15px 15px;
+    border: 2px solid #dcdcdc;
+    border-radius: 8px;
+  }
+
+  .map_container{
+    width: 40%;
+    flex-grow: 1;
+  }
+
+  .btn_add{
+    margin-top: 15px;
+    margin-left: auto;
+  }
+}
