@@ -17,10 +17,10 @@ export const Avatar: FC<AvatarProps> = memo((props) => {
 
     const {
         size = 'm',
-        urlAvatar = 'https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=1288'
+        urlAvatar = 'https://cdnb.artstation.com/p/assets/images/images/058/544/747/large/adriano-dias-render0000-0117.jpg?1674421537'
     } = props;
 
-    return <img className={classNames(styles.Avatar, sizeToClass[size])}
+    return <img loading={'lazy'} className={classNames(styles.Avatar, sizeToClass[size])}
                 alt={'user photo'}
                 src={urlAvatar}/>
 

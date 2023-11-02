@@ -22,6 +22,9 @@ const EditUserFromSlice = createSlice({
     name: 'editUserFromSlice',
     initialState: initialState,
     reducers: {
+        setName: (state, {payload}: PayloadAction<string>) => {
+          state.editName = payload;
+        },
         setCurrentUser: (state, {payload}: PayloadAction<string>) => {
             state.editName = payload;
         },
@@ -75,7 +78,7 @@ const EditUserFromSlice = createSlice({
                 state.editCatchPhrase = payload.company.catchPhrase;
                 state.editBs = payload.company.bs;
             }
-
+            state.isLoading = false;
         })
         builder.addCase(fetchGetUserById.rejected, (state) => {
             state.isLoading = false;
@@ -84,5 +87,6 @@ const EditUserFromSlice = createSlice({
 });
 
 export const {
-    reducer: EditUserFormReducer
+    reducer: EditUserFormReducer,
+    actions: editUserFormActions
 } = EditUserFromSlice;
