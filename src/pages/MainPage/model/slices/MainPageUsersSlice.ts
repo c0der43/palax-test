@@ -27,7 +27,6 @@ const mainPageUsersSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(fetchGetUsers.rejected, (state) => {
-            usersAdapter.setAll(state, payload);
             state.isLoading = false;
         })
     }

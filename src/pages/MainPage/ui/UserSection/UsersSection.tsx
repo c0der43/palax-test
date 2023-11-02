@@ -25,7 +25,7 @@ export const UsersSection: FC<UsersSectionProps> = memo((props) => {
     const [selectedUserId, setSelectedUserId] = useState<number | undefined>();
 
     const users = useSelector(mainPageUsersSelectors.selectAll);
-    const isLoading = useSelector(usersIsLoadingSelector);
+    const isLoadingUsers = useSelector(usersIsLoadingSelector);
 
     const dispatch = useAppDispatch();
 
@@ -56,7 +56,7 @@ export const UsersSection: FC<UsersSectionProps> = memo((props) => {
                 onClickOpenModal={clickOpenModal}
                 className={styles.list}/>
 
-            {isLoading && <Text text={'loading...'}/>}
+            {isLoadingUsers && <Text text={'loading...'}/>}
 
             {
                 selectedUserId && isOpenModal &&  <EditUserModal userId={selectedUserId} onClose={onCloseModal}/>
