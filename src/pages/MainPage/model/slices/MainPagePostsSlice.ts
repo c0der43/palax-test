@@ -23,8 +23,15 @@ const mainPagePostsSlice = createSlice({
         }
     },
     extraReducers: builder => {
+        builder.addCase(fetchGetPostsByUserId.pending, (state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(fetchGetPostsByUserId.rejected, (state) => {
+            state.isLoading = false;
+        })
         builder.addCase(fetchGetPostsByUserId.fulfilled, (state, action) => {
             postsAdapter.addMany(state, action);
+            state.isLoading = false;
         })
     }
 })

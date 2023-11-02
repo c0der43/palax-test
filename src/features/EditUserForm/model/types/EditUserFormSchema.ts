@@ -4,15 +4,16 @@ export interface EditUserFormSchema {
     isLoading: boolean,
     currentUser?: IUser,
 
-    editName: string;
-    editUserName: string;
-    editStreet: string;
-    editSuite: string;
-    editCity: string;
-    editZip: string;
-    editPhone: string;
-    editWebsite: string;
-    editCompanyName: string;
-    editCatchPhrase: string;
-    editBs: string;
+    email: string;
+    name: string;
+    username: string;
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    phone: string;
+    website: string;
+    companyName: string;
+    catchPhrase: string;
+    bs: string;
 }

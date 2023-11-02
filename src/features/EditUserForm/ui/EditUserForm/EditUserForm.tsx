@@ -1,4 +1,4 @@
-import {FC, memo, useCallback, useEffect} from "react";
+import {ChangeEvent, FC, memo, useCallback, useEffect} from "react";
 import {Text} from "@/shared/ui/Text";
 import {useSelector, useStore} from "react-redux";
 import {ReduxStoreWithManager} from "@/app/providers/StoreProvider/config/ReduxStoreWithManager.ts";
@@ -26,6 +26,7 @@ import {editBsSelector} from "@/features/EditUserForm/model/selectors/editBsSele
 import styles from './EditUserForm.module.scss';
 import {Button} from "@/shared/ui/Button";
 import {editIsLoading} from "@/features/EditUserForm/model/selectors/editUserIsLoading/editIsLoading.ts";
+import {fetchUpdateUserData} from "@/features/EditUserForm/model/services/fetchUpdateUserData/fetchUpdateUserData.ts";
 
 interface EditUserFormProps {
     userId: number;
@@ -110,8 +111,17 @@ const EditUserForm: FC<EditUserFormProps> = memo((props) => {
         }
     }, [dispatch, store, userId]);
 
+    const onClickUpdateUserDataHandler = useCallback(() => {
+        dispatch(fetchUpdateUserData());
+    }, [dispatch]);
+
+    const formSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        onClickUpdateUserDataHandler();
+    }
+
     return <>
-        <form className={isLoading ? styles.disabled_container : ''}>
+        <form className={isLoading ? styles.disabled_container : ''} onSubmit={formSubmit}>
             <Text text={'Edit data'} bold size={'l'}/>
 
             <div className={styles.input_container}>

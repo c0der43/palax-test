@@ -65,17 +65,17 @@ export const UserItem: FC<UserItemProps> = memo((props) => {
                     <div className={styles.fieldset_container}>
                         <fieldset>
                             <legend>Адресс</legend>
-                            <Text text={`Улица: ${user.address.street}`}/>
-                            <Text text={`Номер: ${user.address.suite}`}/>
-                            <Text text={`Город: ${user.address.city}`}/>
+                            <Text text={`Street: ${user.address.street}`}/>
+                            <Text text={`Suite: ${user.address.suite}`}/>
+                            <Text text={`City: ${user.address.city}`}/>
                             <Text text={`Zip: ${user.address.zipcode}`}/>
                         </fieldset>
 
                         <fieldset>
                             <legend>Компания</legend>
-                            <Text text={`Название: ${user.company.name}`}/>
-                            <Text text={`Слоган: ${user.company.catchPhrase}`}/>
-                            <Text text={`Описание: ${user.company.bs}`}/>
+                            <Text text={`Comp. name: ${user.company.name}`}/>
+                            <Text text={`Phrase: ${user.company.catchPhrase}`}/>
+                            <Text text={`Desc: ${user.company.bs}`}/>
                         </fieldset>
                     </div>
 
@@ -86,7 +86,7 @@ export const UserItem: FC<UserItemProps> = memo((props) => {
                 <Button
                     onClick={() => onClickViewUserPost?.(user.id)}
                     className={styles.btn_add}>
-                    add
+                    view posts
                 </Button>
             </article>
         </Card>
